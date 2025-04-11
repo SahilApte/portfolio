@@ -1,11 +1,20 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Skills from '@/components/Skills'
 import Projects from '@/components/Projects'
 import Experience from '@/components/Experience'
 import Contact from '@/components/Contact'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
   return (
     <main className="min-h-screen">
       {/* Navigation */}
@@ -15,16 +24,21 @@ export default function Home() {
             <div className="flex items-center">
               <span className="text-xl font-bold text-gray-900 dark:text-white">Sahil Apte</span>
             </div>
-            {/* Mobile Menu Button (placeholder) */}
+            {/* Mobile Menu Button */}
             <div className="-mr-2 flex items-center sm:hidden">
-              <button type="button" className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+              <button
+                type="button"
+                onClick={toggleMenu}
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                aria-controls="mobile-menu"
+                aria-expanded={isMenuOpen}
+              >
                 <span className="sr-only">Open main menu</span>
-                {/* Icon when menu is closed. Heroicon name: menu */}
-                <svg className="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-                </svg>
-                {/* Icon when menu is open. Heroicon name: x */}
-                {/* <svg className="hidden h-6 w-6" ...> ... </svg> */}
+                {isMenuOpen ? (
+                  <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
+                ) : (
+                  <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
+                )}
               </button>
             </div>
             {/* Desktop Menu */}
@@ -37,8 +51,17 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* Mobile Menu (placeholder) */}
-        {/* <div className="sm:hidden" id="mobile-menu"> ... </div> */}
+
+        {/* Mobile Menu Panel */}
+        <div className={`${isMenuOpen ? 'block' : 'hidden'} sm:hidden`} id="mobile-menu">
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-800 shadow-lg">
+            <Link href="#about" onClick={toggleMenu} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700">About</Link>
+            <Link href="#experience" onClick={toggleMenu} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700">Experience</Link>
+            <Link href="#projects" onClick={toggleMenu} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700">Projects</Link>
+            <Link href="#skills" onClick={toggleMenu} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700">Skills</Link>
+            <Link href="#contact" onClick={toggleMenu} className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-700">Contact</Link>
+          </div>
+        </div>
       </nav>
 
       {/* Hero Section */}
