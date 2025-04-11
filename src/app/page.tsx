@@ -83,7 +83,7 @@ export default function Home() {
             </h2>
             <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-400">
               I am a passionate Software QA Engineer with experience in automation testing and software development.
-              Currently pursuing my Bachelor's degree in Computer Science and Engineering at Neil Gogte Institute of Technology.
+              Recently graduated with a Bachelor's degree in Computer Science and Engineering from Neil Gogte Institute of Technology in June 2024.
             </p>
           </div>
         </div>
